@@ -1,0 +1,387 @@
+/* =====================================================================
+   LE CERCLE — Luxury real estate (recriação do template Webild "Marbella")
+   Vanilla CSS. Tokens de design fiéis ao original.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------- TOKENS -- */
+:root {
+  --bg:        #FAF8F5;   /* canvas marfim quente        */
+  --fg:        #1A1A1A;   /* texto quase-preto           */
+  --primary:   #1A1A1A;   /* botões escuros              */
+  --on-primary:#FAF8F5;
+  --secondary: #F0ECE6;   /* pedra quente (botão claro)  */
+  --accent:    #C9A96E;   /* dourado de luxo             */
+  --card:      #FFFFFF;
+  --line:      rgba(26, 26, 26, .12);
+
+  --font-display: "Bricolage Grotesque", "Playfair Display", Georgia, serif;
+  --font-body:    "Inter Tight", system-ui, -apple-system, Segoe UI, sans-serif;
+
+  --radius: 12px;
+  --ease:   cubic-bezier(.22, 1, .36, 1);
+  --wrap:   1200px;
+  --pad:    clamp(20px, 5vw, 64px);
+}
+
+/* --------------------------------------------------------------- RESET ---- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;   /* clip (não hidden) evita criar um scroll-container no body */
+}
+img, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.08; letter-spacing: -.01em; }
+
+.wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad); }
+
+/* =================================================================== NAV == */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px var(--pad);
+  transition: background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+}
+.nav.is-scrolled {
+  background: #ffffff;
+  padding-block: 14px;
+  box-shadow: 0 1px 0 var(--line), 0 10px 30px -24px rgba(26, 26, 26, .5);
+}
+.nav__logo {
+  font-family: var(--font-body); font-weight: 600; font-size: 22px;
+  letter-spacing: -.01em; color: #fff; mix-blend-mode: difference;
+  position: relative; z-index: 95;
+}
+.nav.is-scrolled .nav__logo { color: var(--fg); mix-blend-mode: normal; }
+.nav__right { display: flex; align-items: center; gap: 16px; z-index: 95; }
+
+/* Hambúrguer → transforma-se em X quando aberto. */
+.nav__hamb {
+  position: relative; width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .35);
+  display: grid; place-items: center; transition: border-color .3s var(--ease), background .3s var(--ease);
+}
+.nav.is-scrolled .nav__hamb { border-color: var(--line); }
+.nav__hamb span {
+  position: absolute; width: 18px; height: 1.6px; background: #fff;
+  transition: transform .35s var(--ease), opacity .25s var(--ease), background .3s;
+}
+.nav.is-scrolled .nav__hamb span { background: var(--fg); }
+.nav__hamb span:nth-child(1) { transform: translateY(-4px); }
+.nav__hamb span:nth-child(2) { transform: translateY(4px); }
+.nav__hamb:hover { border-color: var(--accent); }
+body.menu-open .nav__hamb span { background: #fff; }
+body.menu-open .nav__hamb span:nth-child(1) { transform: rotate(45deg); }
+body.menu-open .nav__hamb span:nth-child(2) { transform: rotate(-45deg); }
+body.menu-open .nav__hamb { border-color: rgba(255, 255, 255, .35); }
+
+/* ============================================================== OVERLAY === */
+.overlay {
+  position: fixed; inset: 0; z-index: 92;
+  background: var(--fg); color: var(--on-primary);
+  display: grid; place-items: center;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .7s var(--ease);
+  pointer-events: none;
+}
+body.menu-open .overlay { clip-path: inset(0 0 0 0); pointer-events: auto; }
+.overlay__menu { width: min(760px, 86vw); }
+.overlay__link {
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; padding: clamp(18px, 3.4vw, 34px) 4px;
+  border-top: 1px solid rgba(250, 248, 245, .16);
+  font-family: var(--font-display); font-size: clamp(44px, 9vw, 96px);
+  line-height: 1; color: var(--on-primary);
+  opacity: 0; transform: translateY(30px);
+}
+.overlay__link:last-child { border-bottom: 1px solid rgba(250, 248, 245, .16); }
+body.menu-open .overlay__link { animation: menuIn .6s var(--ease) forwards; }
+body.menu-open .overlay__link:nth-child(1) { animation-delay: .18s; }
+body.menu-open .overlay__link:nth-child(2) { animation-delay: .26s; }
+body.menu-open .overlay__link:nth-child(3) { animation-delay: .34s; }
+@keyframes menuIn { to { opacity: 1; transform: none; } }
+.overlay__text { transition: transform .4s var(--ease), color .4s var(--ease); }
+.overlay__arw { width: clamp(34px, 5vw, 56px); height: clamp(34px, 5vw, 56px); transition: transform .4s var(--ease), color .4s var(--ease); }
+.overlay__link:hover .overlay__text { transform: translateX(18px); color: var(--accent); }
+.overlay__link:hover .overlay__arw { transform: rotate(45deg) scale(1.05); color: var(--accent); }
+
+/* ================================================================ BOTÕES == */
+.btn {
+  --lift: 0;
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  height: 48px; padding: 0 24px; border-radius: var(--radius);
+  font-size: 16px; font-weight: 500; letter-spacing: -.005em; white-space: nowrap;
+  transition: transform .4s var(--ease), background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease);
+  transform: translateY(var(--lift));
+  overflow: hidden;
+}
+.btn--primary   { background: var(--primary); color: var(--on-primary); }
+.btn--primary:hover   { --lift: -3px; box-shadow: 0 14px 30px -12px rgba(26, 26, 26, .55); }
+.btn--secondary { background: var(--secondary); color: var(--fg); }
+.btn--secondary:hover { --lift: -3px; background: #e7e0d6; }
+.btn--send { width: 100%; height: 52px; background: var(--bg); color: var(--fg); }
+.btn--send:hover { --lift: -2px; background: #fff; }
+
+/* Animação por-letra (efeito-assinatura): cada carácter é envolvido num <span>
+   pelo JS e recebe um índice --i; no hover as letras sobem em cascata. */
+.btn__label { display: inline-flex; }
+.btn .ltr {
+  display: inline-block; white-space: pre;
+  transition: transform .45s var(--ease);
+  transition-delay: calc(var(--i) * .022s);
+  will-change: transform;
+}
+.btn--letters:hover .ltr { transform: translateY(-3px); }
+
+/* ============================================================== BADGE/PILL */
+.pill {
+  display: inline-block; padding: 7px 16px; border-radius: 999px;
+  font-size: 13px; font-weight: 500; letter-spacing: .02em;
+  background: var(--secondary); color: var(--fg);
+}
+.pill--light { background: rgba(255, 255, 255, .16); color: #fff; backdrop-filter: blur(8px); }
+
+/* ================================================================= HERO ==
+   .hero-scroll é a secção alta que dá "distância de scroll" ao scrubbing;
+   .hero fica pinado (sticky) enquanto o vídeo avança/recua com o scroll.
+   --hero-scroll-length: altura da secção de scroll (afinável no script/CSS). */
+.hero-scroll { position: relative; height: var(--hero-scroll-length, 320vh); }
+.hero {
+  position: sticky; top: 0; height: 100svh;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.hero__media { position: absolute; inset: 0; z-index: 0; background: #14110e; }
+.hero__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+/* Fallback móvel: sem scroll-scrubbing, o vídeo faz autoplay em loop. */
+.hero.is-fallback { position: relative; height: 100svh; }
+
+.hero__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to top, rgba(15, 14, 12, .78) 0%, rgba(15, 14, 12, .30) 42%, rgba(15, 14, 12, .18) 70%, rgba(15, 14, 12, .42) 100%);
+}
+.hero__inner {
+  position: relative; z-index: 2; color: #fff;
+  padding-bottom: clamp(48px, 8vh, 96px); padding-top: 140px;
+  padding-left: clamp(4px, 1vw, 14px); /* menos do que --pad: puxa o bloco mais à esquerda */
+  display: grid; justify-items: start; gap: 22px; max-width: 900px;
+}
+.hero__title { font-size: clamp(34px, 6vw, 62px); color: #fff; letter-spacing: -.02em; }
+.hero__sub { max-width: 540px; font-size: clamp(14px, 1.6vw, 18px); color: rgba(255, 255, 255, .88); font-weight: 400; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
+
+/* ============================================================ STATEMENT === */
+.statement { padding: clamp(90px, 16vh, 200px) 0; }
+.statement__text {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(34px, 6.4vw, 82px); line-height: 1.12; letter-spacing: -.02em;
+  max-width: 16ch;
+}
+.statement__text .word { transition: color .3s linear; }
+
+/* =============================================================== FIGURE === */
+.figure { padding-bottom: clamp(80px, 12vh, 150px); }
+.figure__frame {
+  border-radius: var(--radius); overflow: hidden;
+  aspect-ratio: 16 / 8;
+}
+.figure__frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* =============================================================== VILLAS === */
+.villas { padding-bottom: clamp(90px, 14vh, 170px); }
+.villas__head { max-width: 640px; margin-bottom: clamp(40px, 6vw, 72px); display: grid; gap: 18px; justify-items: start; }
+.villas__title { font-size: clamp(40px, 6vw, 64px); }
+.villas__sub { font-size: clamp(16px, 2vw, 20px); color: rgba(26, 26, 26, .66); max-width: 46ch; }
+
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 3vw, 40px); }
+.card { display: grid; gap: 18px; }
+.card__media {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  aspect-ratio: 4 / 3; background: var(--secondary);
+  transition: filter .5s var(--ease), opacity .5s var(--ease), transform .6s var(--ease);
+}
+.card__media img,
+.card__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.card__media img { transition: transform .9s var(--ease); }
+.card__video { opacity: 0; transition: opacity .5s var(--ease); }
+
+/* Ao passar o rato: a imagem faz zoom, o vídeo aparece por cima e reproduz. */
+.card:hover .card__media img { transform: scale(1.06); }
+.card:hover .card__video { opacity: 1; }
+
+/* As restantes casas ficam a cinzento enquanto uma está em hover (:has). */
+.grid:has(.card:hover) .card:not(:hover) .card__media { filter: grayscale(1) brightness(.9); opacity: .5; }
+
+/* Etiqueta de preço + localização — canto inferior direito, sobre o vídeo. */
+.card__badge {
+  position: absolute; right: 12px; bottom: 12px; z-index: 2;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 1px;
+  text-align: right; color: #fff; line-height: 1.25;
+  opacity: 0; transform: translateY(8px); transition: opacity .4s var(--ease), transform .4s var(--ease);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .55), 0 1px 2px rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+.card:hover .card__badge { opacity: 1; transform: none; }
+.card__price { font-family: var(--font-display); font-size: clamp(18px, 2.4vw, 22px); font-weight: 500; }
+.card__loc { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, .9); }
+
+.card__title { font-size: clamp(24px, 3vw, 32px); }
+.card__desc { font-size: 18px; color: rgba(26, 26, 26, .6); max-width: 42ch; }
+
+/* ============================================================== CONTACT === */
+/* A secção inteira cabe num único ecrã (sem scroll): ocupa 100svh e centra
+   verticalmente o cartão, que é mantido compacto. */
+.contact {
+  position: relative; overflow: hidden;
+  min-height: 100svh;
+  display: flex; align-items: center;
+  padding: clamp(40px, 6vh, 72px) 0;
+}
+.contact__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.contact__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(120deg, rgba(20, 17, 14, .72), rgba(20, 17, 14, .42)); }
+.contact__inner { position: relative; z-index: 2; width: 100%; display: flex; justify-content: center; }
+.contact__card {
+  width: min(560px, 100%);
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .22);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px; padding: clamp(24px, 3.4vw, 38px);
+  color: #fff; display: grid; gap: clamp(12px, 1.6vh, 16px);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .6);
+}
+.contact__title { font-size: clamp(30px, 4.4vw, 46px); color: #fff; }
+.contact__lead { color: rgba(255, 255, 255, .82); font-size: clamp(15px, 1.7vw, 17px); }
+.form { display: grid; gap: clamp(10px, 1.4vh, 13px); margin-top: 2px; }
+.form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form__field {
+  width: 100%; font: inherit; color: #fff; padding: 12px 15px;
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: var(--radius); transition: border-color .3s, background .3s;
+}
+.form__field::placeholder { color: rgba(255, 255, 255, .6); }
+.form__field:focus { outline: none; border-color: var(--accent); background: rgba(255, 255, 255, .14); }
+textarea.form__field { resize: vertical; min-height: 72px; }
+.btn--send { height: 48px; }
+
+.contact__foot { margin-top: 2px; }
+.contact__prefer { color: rgba(255, 255, 255, .82); font-size: 14px; }
+
+/* =============================================================== FOOTER ===
+   Footer escuro sobre uma imagem clean de luxo, com um wordmark "Monrion"
+   gigante numa só linha a fechar a página. */
+.footer {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding: clamp(60px, 9vh, 110px) 0 clamp(12px, 2vw, 28px);
+  color: #fff; background: #0f0e0c;
+}
+.footer::before {   /* imagem de luxo em fundo */
+  content: ""; position: absolute; inset: 0; z-index: -2;
+  background: url("assets/footer-bg.jpg") center 35% / cover no-repeat;
+}
+.footer::after {    /* véu escuro para legibilidade do texto */
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to bottom, rgba(15, 14, 12, .90) 0%, rgba(15, 14, 12, .80) 40%, rgba(15, 14, 12, .92) 100%);
+}
+.footer__inner { display: grid; grid-template-columns: 1.3fr 3fr; gap: clamp(36px, 6vw, 80px); }
+.footer__logo { font-family: var(--font-display); font-size: 30px; color: #fff; }
+.footer__tag { margin-top: 14px; color: rgba(255, 255, 255, .62); max-width: 28ch; }
+.footer__contact { margin-top: 18px; font-style: normal; font-size: 14px; line-height: 1.9; color: rgba(255, 255, 255, .6); }
+.footer__contact a { transition: color .25s; }
+.footer__contact a:hover { color: var(--accent); }
+.footer__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.footer__col { display: grid; gap: 12px; align-content: start; }
+.footer__col h4 { font-family: var(--font-display); font-size: 16px; margin-bottom: 4px; color: #fff; }
+.footer__col a { font-size: 16px; color: rgba(255, 255, 255, .6); transition: color .25s, opacity .25s; width: fit-content; }
+.footer__col a:hover { color: #fff; }
+.footer__bottom {
+  margin-top: clamp(40px, 6vw, 72px); padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .14);
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  font-size: 14px; color: rgba(255, 255, 255, .5);
+}
+.footer__wordmark {
+  margin-top: clamp(18px, 3vw, 44px);
+  font-family: var(--font-display); font-weight: 600;
+  line-height: .84; letter-spacing: -.03em; text-align: center; white-space: nowrap;
+  font-size: 25.5vw;                       /* preenche a largura numa só linha */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, .92), rgba(255, 255, 255, .34));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-user-select: none; user-select: none;
+}
+
+/* ========================================================= REVEAL / SCROLL
+   Só se esconde quando o JS está activo (.js em <html>); sem JS tudo é visível. */
+.js [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+.js [data-stagger] .word { display: inline-block; opacity: 0; transform: translateY(24px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+[data-stagger] .word { display: inline-block; }
+[data-stagger].is-in .word { opacity: 1; transform: none; }
+
+/* ============================================================= RESPONSIVE =
+   Abordagem fluida (clamp) + pontos de quebra para tablet, telemóvel e ecrãs
+   pequenos, garantindo boa leitura em qualquer dispositivo. */
+
+/* Tablet / portáteis pequenos */
+@media (max-width: 1024px) {
+  :root { --pad: clamp(18px, 4vw, 40px); }
+  .footer__inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero__inner { max-width: 100%; }
+}
+
+/* Telemóvel grande / tablet vertical */
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+  .footer__cols { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+  .form__row { grid-template-columns: 1fr; }
+  .nav { padding: 16px var(--pad); }
+  .nav.is-scrolled { padding-block: 12px; }
+  .btn { height: 46px; padding: 0 18px; font-size: 15px; }
+  .hero__inner { padding-top: 120px; gap: 18px; }
+  .contact__card { width: 100%; }
+  .figure__frame { aspect-ratio: 3 / 2; }
+  /* Em ecrãs de toque, o "hover" das cartas não se aplica: mostra badge sempre
+     visível e desliga o realce a cinzento. */
+  .card__badge { opacity: 1; transform: none; }
+}
+
+/* Telemóvel */
+@media (max-width: 520px) {
+  .footer__cols { grid-template-columns: 1fr; }
+  .contact__foot { flex-direction: column; align-items: flex-start; }
+  .footer__bottom { flex-direction: column; gap: 6px; }
+  .hero__cta { width: 100%; }
+  .hero__cta .btn { flex: 1; }
+  .overlay__menu { width: 88vw; }
+}
+
+/* Ecrãs muito pequenos */
+@media (max-width: 360px) {
+  .btn { font-size: 14px; padding: 0 14px; }
+  .nav__logo { font-size: 20px; }
+}
+
+/* Ecrãs largos: limita ainda mais para manter as medidas de leitura. */
+@media (min-width: 1600px) { :root { --wrap: 1320px; } }
+
+/* Dispositivos sem hover fino (toque): as cartas ficam estáticas (sem vídeo). */
+@media (hover: none) {
+  .grid:has(.card:hover) .card:not(:hover) .card__media { filter: none; opacity: 1; }
+  .card:hover .card__video { opacity: 0; }
+}
+
+/* Respeita quem prefere menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

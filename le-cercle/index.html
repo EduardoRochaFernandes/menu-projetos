@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-PT" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Monrion Imobiliária — Imóveis de Luxo em Portugal</title>
+  <meta name="description" content="Monrion Imobiliária — villas à beira-mar e apartamentos de luxo exclusivos em Portugal. O seu sonho, entregue chave na mão." />
+  <meta name="theme-color" content="#faf8f5" />
+
+  <!-- Tipos de letra:
+       · "Inter Tight" — fonte de corpo (Google Fonts).
+       · "Bricolage Grotesque" — fonte de display (humanista, quente). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Inter+Tight:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%23C9A96E' stroke-width='6'/></svg>" />
+</head>
+<body>
+
+  <!-- =================================================================== NAV == -->
+  <nav class="nav" id="nav">
+    <a href="#top" class="nav__logo">Monrion</a>
+    <div class="nav__right">
+      <a href="#contacto" class="btn btn--secondary btn--letters" data-letters>Marcar Visita</a>
+      <button class="nav__hamb" id="hamb" aria-label="Abrir menu" aria-expanded="false" aria-controls="overlay">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sobreposição de ecrã inteiro aberta pelo menu hambúrguer. -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <nav class="overlay__menu">
+      <a href="#villas" class="overlay__link" data-close>
+        <span class="overlay__text">Propriedades</span>
+        <svg class="overlay__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <a href="#declaracao" class="overlay__link" data-close>
+        <span class="overlay__text">Sobre</span>
+        <svg class="overlay__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <a href="#contacto" class="overlay__link" data-close>
+        <span class="overlay__text">Contacto</span>
+        <svg class="overlay__arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+    </nav>
+  </div>
+
+  <!-- ================================================================== HERO ==
+       Secção alta (scroll) com o hero "pinado" (sticky) por dentro. O vídeo de
+       fundo é controlado pelo scroll (scroll-scrubbing) — ver script.js. -->
+  <div class="hero-scroll" id="heroScroll">
+    <header class="hero" id="top">
+      <div class="hero__media">
+        <!-- Vídeo de fundo. Sem autoplay/loop: a reprodução é comandada pelo scroll.
+             hero-1080.mp4 = versão otimizada para SEEK/scrubbing (1080p, keyframe a
+             cada 0.5s, +faststart). Trocar o caminho abaixo é suficiente para mudar o vídeo. -->
+        <video class="hero__video" id="heroVideo" muted playsinline preload="auto"
+               aria-hidden="true">
+          <source src="assets/hero-1080.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="hero__scrim"></div>
+
+      <div class="wrap hero__inner">
+        <h1 class="hero__title reveal" data-reveal>Viva Onde o Sol<br />Encontra o Mar</h1>
+
+        <p class="hero__sub reveal" data-reveal>
+          Villas à beira-mar e apartamentos de luxo exclusivos na costa portuguesa.
+          O seu sonho, entregue chave na mão.
+        </p>
+
+        <div class="hero__cta reveal" data-reveal>
+          <a href="#villas" class="btn btn--primary btn--letters" data-letters>Ver Propriedades</a>
+          <a href="#contacto" class="btn btn--secondary btn--letters" data-letters>Marcar Visita</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- ============================================================= DECLARAÇÃO == -->
+  <section class="statement" id="declaracao">
+    <div class="wrap">
+      <p class="statement__text" data-scroll-reveal>Para quem viaja como se fosse uma forma de arte.</p>
+    </div>
+  </section>
+
+  <!-- Imagem-declaração de largura total. -->
+  <section class="figure">
+    <div class="wrap">
+      <div class="figure__frame" data-reveal>
+        <img src="assets/statement.jpg" alt="Uma villa mediterrânica branca com piscina em Portugal" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ VILLAS ==
+       Ao passar o rato numa casa, as restantes ficam a cinzento e essa mostra um
+       vídeo com o preço + localização no canto inferior direito. -->
+  <section class="villas" id="villas">
+    <div class="wrap">
+      <header class="villas__head">
+        <span class="pill" data-reveal>Propriedades</span>
+        <h2 class="villas__title" data-stagger>As Nossas Villas</h2>
+        <p class="villas__sub" data-reveal>
+          Residências selecionadas nas localizações mais cobiçadas de Portugal,
+          onde a arquitetura e a luz encontram o mar.
+        </p>
+      </header>
+
+      <div class="grid" id="grid">
+        <article class="card" data-reveal data-video="assets/card-1.mp4">
+          <div class="card__media">
+            <img src="assets/villa-1.jpg" alt="Villa Serena" />
+            <video class="card__video" muted loop playsinline preload="none"></video>
+            <div class="card__badge"><span class="card__price">€4.500.000</span><span class="card__loc">Comporta</span></div>
+          </div>
+          <h3 class="card__title">Villa Serena</h3>
+          <p class="card__desc">Serenidade à beira-mar com piscina infinita e vista desafogada sobre o oceano.</p>
+        </article>
+
+        <article class="card" data-reveal data-video="assets/card-2.mp4">
+          <div class="card__media">
+            <img src="assets/villa-2.jpg" alt="Casa do Sol" />
+            <video class="card__video" muted loop playsinline preload="none"></video>
+            <div class="card__badge"><span class="card__price">€3.200.000</span><span class="card__loc">Quinta do Lago</span></div>
+          </div>
+          <h3 class="card__title">Casa do Sol</h3>
+          <p class="card__desc">Sala inundada de sol, emoldurada por palmeiras e pedra algarvia.</p>
+        </article>
+
+        <article class="card" data-reveal data-video="assets/card-3.mp4">
+          <div class="card__media">
+            <img src="assets/villa-3.jpg" alt="Villa Atlântico" />
+            <video class="card__video" muted loop playsinline preload="none"></video>
+            <div class="card__badge"><span class="card__price">€5.800.000</span><span class="card__loc">Cascais</span></div>
+          </div>
+          <h3 class="card__title">Villa Atlântico</h3>
+          <p class="card__desc">Interiores amplos e luminosos, desenhados para manhãs sem pressa.</p>
+        </article>
+
+        <article class="card" data-reveal data-video="assets/card-4.mp4">
+          <div class="card__media">
+            <img src="assets/villa-4.jpg" alt="Ático Meridian" />
+            <video class="card__video" muted loop playsinline preload="none"></video>
+            <div class="card__badge"><span class="card__price">€2.900.000</span><span class="card__loc">Lisboa</span></div>
+          </div>
+          <h3 class="card__title">Ático Meridian</h3>
+          <p class="card__desc">Um ático suspenso sobre o coração de Lisboa.</p>
+        </article>
+
+        <article class="card" data-reveal data-video="assets/card-5.mp4">
+          <div class="card__media">
+            <img src="assets/villa-5.jpg" alt="Villa Branca" />
+            <video class="card__video" muted loop playsinline preload="none"></video>
+            <div class="card__badge"><span class="card__price">€3.750.000</span><span class="card__loc">Sintra</span></div>
+          </div>
+          <h3 class="card__title">Villa Branca</h3>
+          <p class="card__desc">Linhas brancas minimalistas em torno de um jardim com piscina privada.</p>
+        </article>
+
+        <article class="card" data-reveal data-video="assets/card-6.mp4">
+          <div class="card__media">
+            <img src="assets/villa-6.jpg" alt="Casa Dourada" />
+            <video class="card__video" muted loop playsinline preload="none"></video>
+            <div class="card__badge"><span class="card__price">€6.200.000</span><span class="card__loc">Estoril</span></div>
+          </div>
+          <h3 class="card__title">Casa Dourada</h3>
+          <p class="card__desc">Grandiosidade no Estoril, com terraços feitos para o pôr do sol.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================== CONTACTO == -->
+  <section class="contact" id="contacto">
+    <img class="contact__bg" src="assets/contact-bg.jpg" alt="" aria-hidden="true" />
+    <div class="contact__scrim"></div>
+
+    <div class="wrap contact__inner">
+      <div class="contact__card" data-reveal>
+        <span class="pill pill--light">Contacto</span>
+        <h2 class="contact__title">Entre em Contacto</h2>
+        <p class="contact__lead">Diga-nos o que procura e a nossa equipa preparará uma seleção privada para si.</p>
+
+        <form class="form" novalidate>
+          <div class="form__row">
+            <input class="form__field" type="text" name="nome" placeholder="O seu nome" autocomplete="name" />
+            <input class="form__field" type="email" name="email" placeholder="Endereço de email" autocomplete="email" />
+          </div>
+          <textarea class="form__field" name="mensagem" rows="4" placeholder="Fale-nos da propriedade dos seus sonhos…"></textarea>
+          <button type="submit" class="btn btn--send btn--letters" data-letters>Enviar Mensagem</button>
+        </form>
+
+        <div class="contact__foot">
+          <p class="contact__prefer">Prefere falar connosco? Marque uma visita privada — geral@monrion.pt · +351 210 123 456</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ RODAPÉ == -->
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <a href="#top" class="footer__logo">Monrion Imobiliária</a>
+        <p class="footer__tag">Uma forma de viver requintada em Portugal.</p>
+        <address class="footer__contact">
+          Avenida da Liberdade 194, 1250-147 Lisboa<br />
+          <a href="tel:+351210123456">+351 210 123 456</a> · <a href="mailto:geral@monrion.pt">geral@monrion.pt</a><br />
+          Licença AMI 21456
+        </address>
+      </div>
+
+      <nav class="footer__cols">
+        <div class="footer__col">
+          <h4>Propriedades</h4>
+          <a href="#villas">Villas</a>
+          <a href="#villas">Apartamentos</a>
+          <a href="#villas">Áticos</a>
+          <a href="#villas">Novos Empreendimentos</a>
+        </div>
+        <div class="footer__col">
+          <h4>Serviços</h4>
+          <a href="#contacto">Procura de Imóveis</a>
+          <a href="#contacto">Assessoria Jurídica</a>
+          <a href="#contacto">Design de Interiores</a>
+          <a href="#contacto">Gestão de Propriedades</a>
+        </div>
+        <div class="footer__col">
+          <h4>Localizações</h4>
+          <a href="#villas">Comporta</a>
+          <a href="#villas">Cascais & Estoril</a>
+          <a href="#villas">Quinta do Lago</a>
+          <a href="#villas">Sintra</a>
+        </div>
+        <div class="footer__col">
+          <h4>Empresa</h4>
+          <a href="#declaracao">Sobre Nós</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos e Condições</a>
+        </div>
+      </nav>
+    </div>
+    <div class="wrap footer__bottom">
+      <span>© 2026 Monrion Imobiliária. Todos os direitos reservados.</span>
+      <span>Cascais · Lisboa · Algarve · Portugal</span>
+    </div>
+
+    <div class="footer__wordmark" aria-hidden="true">Monrion</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
