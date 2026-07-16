@@ -1,0 +1,205 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Le Prestige — Alta Gastronomia numa Adega de Meia-Noite</title>
+<meta name="description" content="Le Prestige — um santuário gastronómico envolto em madeira escura, velas e vinho. Uma mesa para cada momento." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="nav" id="top">
+  <div class="nav__inner">
+    <a href="#top" class="nav__logo">Le Prestige</a>
+    <div class="nav__right">
+      <a href="#contacto" class="btn btn--primary btn--pill">
+        <span class="roll"><span>Reservar Mesa</span><span>Reservar Mesa</span></span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ FULLSCREEN MENU OVERLAY ============ -->
+<nav class="overlay" id="overlay" aria-hidden="true">
+  <div class="overlay__inner">
+    <a class="overlay__item" href="#pratos" data-close>
+      <span class="overlay__label">Menu</span>
+      <svg class="overlay__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+    <a class="overlay__item" href="#experiencias" data-close>
+      <span class="overlay__label">Adega</span>
+      <svg class="overlay__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+    <a class="overlay__item" href="#origens" data-close>
+      <span class="overlay__label">Eventos</span>
+      <svg class="overlay__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+    <a class="overlay__item" href="#contacto" data-close>
+      <span class="overlay__label">Contacto</span>
+      <svg class="overlay__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero__slides">
+    <img class="hero__slide" alt="Sala de jantar iluminada a velas em tons de castanho"
+         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=80" />
+    <img class="hero__slide" alt="Interior de restaurante requintado em madeira escura e cobre"
+         src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1920&q=80" />
+    <img class="hero__slide" alt="Brinde com taças de espumante ao entardecer"
+         src="https://images.unsplash.com/photo-1470158499416-75be9aa0c4db?auto=format&fit=crop&w=1920&q=80" />
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="hero__blend"></div>
+
+  <h1 class="hero__wordmark">Le Prestige</h1>
+
+  <div class="hero__cta">
+    <a href="#pratos" class="btn btn--primary btn--lg">
+      <span class="roll"><span>Ver o Menu</span><span>Ver o Menu</span></span>
+    </a>
+    <a href="#tour" class="btn btn--secondary btn--lg">
+      <span class="roll"><span>Ver o Vídeo</span><span>Ver o Vídeo</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section about" id="about">
+  <div class="w">
+    <div class="about__grid">
+      <div class="about__copy">
+        <span class="badge reveal">Sobre Nós</span>
+        <h2 class="h2 grad reveal" data-split>Uma Experiência Gastronómica Inesquecível</h2>
+        <p class="lead reveal" data-split>Da adega privada às mesas iluminadas a lume de vela, Le Prestige é um santuário para os sentidos. Criámos um espaço onde a madeira escura, o cristal e o vinho emolduram cada momento — um lugar para saborear devagar e recordar o que é verdadeiro requinte.</p>
+        <p class="lead reveal" data-split>Cada prato nasce da terra. Cada experiência é pensada para celebrar. Desde 1844, mantemos uma só promessa: servir-lhe a mesa mais memorável da sua vida.</p>
+      </div>
+      <div class="about__media reveal">
+        <img class="about__back" alt="Interior aconchegante do restaurante em tons quentes"
+             src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80" />
+        <img class="about__front" alt="Taça de vinho tinto em ambiente íntimo e sombrio"
+             src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?auto=format&fit=crop&w=900&q=80" />
+        <span class="badge about__est">Desde 1844</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRATOS (MENU) ============ -->
+<section class="section rooms" id="pratos">
+  <div class="w">
+    <header class="section__head">
+      <span class="badge reveal">Menu</span>
+      <h2 class="h2 grad reveal" data-split>Pratos em Destaque</h2>
+      <p class="sub reveal" data-split>Seis criações de autor, cada uma emoldurada por técnica clássica e ingredientes de origem certificada.</p>
+    </header>
+    <div class="rooms__grid" id="pratosGrid"></div>
+  </div>
+</section>
+
+<!-- ============ EXPERIÊNCIAS (AMENITIES) ============ -->
+<section class="section amenities" id="experiencias">
+  <div class="w">
+    <header class="section__head">
+      <span class="badge reveal">Adega &amp; Experiências</span>
+      <h2 class="h2 grad reveal" data-split>Experiências Requintadas</h2>
+      <p class="sub reveal" data-split>Da adega privada ao terraço ao anoitecer — cada momento pensado em tons quentes de castanho e âmbar.</p>
+    </header>
+
+    <div class="carousel">
+      <div class="carousel__track" id="carTrack"></div>
+    </div>
+
+    <div class="carousel__foot">
+      <div class="progress"><span class="progress__thumb" id="carThumb"></span></div>
+      <div class="carousel__nav">
+        <button class="circle" id="carPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <button class="circle" id="carNext" aria-label="Seguinte">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AS ORIGENS (BENTO) ============ -->
+<section class="section journeys" id="origens">
+  <div class="w">
+    <header class="section__head">
+      <span class="badge reveal">Origens</span>
+      <h2 class="h2 grad reveal" data-split>As Origens</h2>
+      <p class="sub reveal" data-split>Da Borgonha à Toscana, dos Altos da Colômbia ao Vale do Douro — os terroirs que dão forma ao nosso menu.</p>
+    </header>
+    <div class="bento" id="bento"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="section contact" id="contacto">
+  <div class="w">
+    <div class="contact__grid">
+      <div class="card contact__card reveal">
+        <span class="badge">Contacto</span>
+        <h2 class="h2 grad" data-split>Reserve a Sua Mesa</h2>
+        <p class="sub" data-split>Diga-nos quando, e prepararemos a sua experiência.</p>
+        <form class="form" id="bookingForm" novalidate>
+          <div class="form__row">
+            <input type="text" name="name" placeholder="Nome Completo" required />
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
+          <div class="form__row">
+            <input type="tel" name="phone" placeholder="Telefone" />
+            <input type="text" name="dates" placeholder="Data Preferida" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" />
+          </div>
+          <textarea name="requests" rows="4" placeholder="Pedidos Especiais"></textarea>
+          <button type="submit" class="btn btn--primary btn--block">
+            <span class="roll"><span>Enviar Reserva</span><span>Enviar Reserva</span></span>
+          </button>
+          <p class="form__note" id="formNote" hidden>Obrigado — o seu pedido de reserva foi recebido. A nossa equipa responderá em breve.</p>
+        </form>
+      </div>
+      <div class="contact__media reveal">
+        <img alt="Brinde com taças de espumante ao entardecer, ambiente requintado"
+             src="https://images.unsplash.com/photo-1470158499416-75be9aa0c4db?auto=format&fit=crop&w=1000&q=80" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="w">
+    <div class="footer__wordmark">Le Prestige</div>
+    <div class="footer__cols">
+      <ul>
+        <li><button>Menu</button></li>
+        <li><button>Adega</button></li>
+        <li><button>Eventos</button></li>
+      </ul>
+      <ul>
+        <li><button>As Origens</button></li>
+        <li><button>Sala Privada</button></li>
+        <li><button>Ocasiões Especiais</button></li>
+      </ul>
+      <ul>
+        <li><a href="#contacto">Reservar Mesa</a></li>
+        <li><button>Localização</button></li>
+        <li><button>Contacto</button></li>
+      </ul>
+    </div>
+    <div class="footer__base">
+      <span>© 1844—2026 Le Prestige</span>
+      <span>Uma mesa para cada momento.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
