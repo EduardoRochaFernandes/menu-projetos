@@ -1,0 +1,2 @@
+:HL["/monrion-travel/_next/static/chunks/1u7wlj_3_070v.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"HkNtrAB7KYtWM32L4h_gN"}
