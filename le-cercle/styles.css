@@ -46,14 +46,20 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height
 /* =================================================================== NAV == */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  transition: background .4s var(--ease), box-shadow .4s var(--ease);
+}
+.nav__inner {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 22px var(--pad);
-  transition: background .4s var(--ease), padding .4s var(--ease), box-shadow .4s var(--ease);
+  width: 100%;
+  padding-block: 22px;
+  transition: padding .4s var(--ease);
 }
 .nav.is-scrolled {
   background: #ffffff;
-  padding-block: 14px;
   box-shadow: 0 1px 0 var(--line), 0 10px 30px -24px rgba(26, 26, 26, .5);
+}
+.nav.is-scrolled .nav__inner {
+  padding-block: 14px;
 }
 .nav__logo {
   font-family: var(--font-body); font-weight: 600; font-size: 22px;
@@ -345,8 +351,8 @@ textarea.form__field { resize: vertical; min-height: 72px; }
   .grid { grid-template-columns: 1fr; }
   .footer__cols { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
   .form__row { grid-template-columns: 1fr; }
-  .nav { padding: 16px var(--pad); }
-  .nav.is-scrolled { padding-block: 12px; }
+  .nav__inner { padding-block: 16px; }
+  .nav.is-scrolled .nav__inner { padding-block: 12px; }
   .btn { height: 46px; padding: 0 18px; font-size: 15px; }
   .hero__inner { padding-top: 120px; gap: 18px; }
   .contact__card { width: 100%; }
