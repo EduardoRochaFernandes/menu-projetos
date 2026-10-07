@@ -6,7 +6,6 @@
       "numberOfRuns": 1,
       "settings": { "chromeFlags": "--no-sandbox", "onlyCategories": ["performance", "accessibility", "best-practices", "seo"] }
     },
-    "assert": { "assertions": {} },
     "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
   }
 }

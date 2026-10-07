@@ -62,7 +62,7 @@ A second workflow ([`quality.yml`](.github/workflows/quality.yml)) runs HTML val
 ├── lumiere/              # hair salon demo (Next.js static export, build output only)
 ├── monrion-travel/       # travel demo (Next.js static export, build output only)
 ├── docs/screenshots/     # preview images used by the landing page and this README
-├── scripts/              # build-pages, check-links, screenshots
+├── scripts/              # build-pages, check-links, screenshots, lighthouse-summary
 ├── server.js             # local dev server with Range support
 └── .github/workflows/    # pages.yml (deploy), quality.yml (advisory checks)
 ```

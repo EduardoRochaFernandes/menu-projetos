@@ -8,6 +8,8 @@
     "attribute-boolean-style": "off",
     "attribute-empty-style": "off",
     "no-redundant-role": "off",
-    "heading-level": "off"
+    "heading-level": "off",
+    "doctype-style": "off",
+    "tel-non-breaking": "off"
   }
 }

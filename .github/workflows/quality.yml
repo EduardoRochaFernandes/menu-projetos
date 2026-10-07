@@ -1,6 +1,6 @@
 name: Quality (non-blocking)
 
-# Advisory checks: HTML validation and Lighthouse. They never fail the build.
+# Advisory checks: HTML validation and Lighthouse. They report problems but never fail the build.
 on:
   pull_request:
   push:
@@ -14,19 +14,20 @@ jobs:
   html-validate:
     name: HTML validation
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Validate hand-written pages (Next.js exports are generated and skipped)
-        run: npx --yes html-validate@9 --config .htmlvalidate.json index.html aurion/index.html joes-coffee/index.html le-cercle/index.html
+        run: |
+          npx --yes html-validate@9 --config .htmlvalidate.json \
+            index.html aurion/index.html joes-coffee/index.html le-cercle/index.html \
+            || echo "::warning::html-validate reported issues in the demo pages (advisory only, see the log above)"
 
   lighthouse:
     name: Lighthouse
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,6 +37,9 @@ jobs:
         run: node scripts/build-pages.mjs ""
       - name: Run Lighthouse CI
         run: npx --yes @lhci/cli@0.14 autorun --config=lighthouserc.json
+      - name: Scores summary
+        if: always()
+        run: node scripts/lighthouse-summary.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
