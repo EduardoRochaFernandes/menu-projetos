@@ -1,0 +1,12 @@
+# Build output of scripts/build-pages.mjs
+_site/
+node_modules/
+# Raw (unresized) screenshots; only the .jpg files are committed
+docs/screenshots/*.png
+.lighthouseci/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+.env

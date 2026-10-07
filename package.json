@@ -1,0 +1,14 @@
+{
+  "name": "menu-projetos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page and live demos of five front-end website concepts.",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build-pages.mjs",
+    "check-links": "node scripts/check-links.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
