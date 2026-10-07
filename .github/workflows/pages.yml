@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and check site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build artifact (prefixes the Next.js exports with the /menu-projetos base path)
+        run: node scripts/build-pages.mjs /menu-projetos
+      - name: Check local links
+        run: node scripts/check-links.mjs /menu-projetos
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  smoke-test:
+    name: Smoke test live URLs
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every demo returns HTTP 200
+        run: |
+          base="https://eduardorochafernandes.github.io/menu-projetos"
+          for p in "" aurion/ joes-coffee/ le-cercle/ lumiere/ monrion-travel/ \
+                   le-cercle/assets/hero-1080.mp4 docs/screenshots/lumiere.jpg; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5 --retry-all-errors "$base/$p")
+            echo "$code  $base/$p"
+            [ "$code" = "200" ] || exit 1
+          done

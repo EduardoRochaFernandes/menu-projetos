@@ -1,0 +1,44 @@
+name: Quality (non-blocking)
+
+# Advisory checks: HTML validation and Lighthouse. They never fail the build.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  html-validate:
+    name: HTML validation
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate hand-written pages (Next.js exports are generated and skipped)
+        run: npx --yes html-validate@9 --config .htmlvalidate.json index.html aurion/index.html joes-coffee/index.html le-cercle/index.html
+
+  lighthouse:
+    name: Lighthouse
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build site at the domain root (empty base path)
+        run: node scripts/build-pages.mjs ""
+      - name: Run Lighthouse CI
+        run: npx --yes @lhci/cli@0.14 autorun --config=lighthouserc.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-report
+          path: .lighthouseci
+          if-no-files-found: ignore
