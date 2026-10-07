@@ -1,17 +1,94 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Menu de Projetos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Front-end demo sites — Eduardo Fernandes</title>
+<meta name="description" content="Live demos of five front-end website concepts (hair salon, real estate, coffee shop, restaurant, travel). Site content is in Portuguese.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1a1a'/><circle cx='50' cy='50' r='24' fill='none' stroke='%23c9a96e' stroke-width='8'/></svg>">
+<style>
+  :root { --bg:#faf8f5; --fg:#1a1a1a; --muted:#5f5b55; --card:#fff; --line:#e6e0d6; --accent:#8a6a2f; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14120f; --fg:#f1ede6; --muted:#a8a197; --card:#1d1a16; --line:#332e27; --accent:#d4b06a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); line-height:1.55;
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 56px 20px 40px; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 12px; letter-spacing: -.02em; }
+  .lead { color: var(--muted); max-width: 62ch; margin: 0 0 20px; font-size: 1.05rem; }
+  .note { border:1px solid var(--line); border-left:4px solid var(--accent); background:var(--card);
+          padding: 12px 16px; border-radius: 8px; margin: 0 0 36px; font-size: .95rem; max-width: 70ch; }
+  .grid { display:grid; gap:24px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); padding:0; margin:0; list-style:none; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+  .card img { width:100%; aspect-ratio: 16/10; object-fit:cover; display:block; background:var(--line); }
+  .card div { padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card h2 { margin:0; font-size:1.2rem; }
+  .card p { margin:0; color:var(--muted); font-size:.95rem; }
+  .tags { font-size:.8rem; color:var(--accent); letter-spacing:.02em; }
+  .open { margin-top:auto; padding-top:6px; font-weight:600; color:var(--fg); text-decoration:none; }
+  .open:hover, .open:focus-visible { text-decoration:underline; color:var(--accent); }
+  .card a.cover { display:block; }
+  footer { max-width:1100px; margin:0 auto; padding:0 20px 56px; color:var(--muted); font-size:.9rem; }
+  footer a { color:var(--accent); }
+</style>
 </head>
 <body>
-<h1>Menu de Projetos</h1>
-<ul>
-  <li><a href="lumiere/" target="_blank">Lumière</a></li>
-  <li><a href="le-cercle/" target="_blank">Le Cercle</a></li>
-  <li><a href="joes-coffee/" target="_blank">Joe's Coffee</a></li>
-  <li><a href="aurion/" target="_blank">Aurion</a></li>
-  <li><a href="monrion-travel/" target="_blank">Monrion Travel</a></li>
-</ul>
+<main>
+  <h1>Front-end demo sites</h1>
+  <p class="lead">Five self-contained website concepts built as a front-end portfolio by Eduardo Fernandes: layout, typography, scroll and hover interactions, responsive design. Click a card to open the live demo.</p>
+  <p class="note"><strong>Language note:</strong> the demo sites themselves are written in Portuguese (pt-PT), because they were designed for a Portuguese audience. All brands, phone numbers, e-mails and claims on them are fictional placeholders.</p>
+
+  <ul class="grid">
+    <li class="card">
+      <a class="cover" href="lumiere/" target="_blank" rel="noopener"><img src="docs/screenshots/lumiere.jpg" alt="Lumière hair salon site: hero with salon chairs and the headline 'Onde a Luz Encontra a Arte do Cabelo'" width="1100" height="688" loading="lazy"></a>
+      <div>
+        <h2>Lumière Cabeleireira</h2>
+        <p>Luxury hair-salon landing page with services, results, team and contact sections.</p>
+        <span class="tags">Next.js static export · React</span>
+        <a class="open" href="lumiere/" target="_blank" rel="noopener">Open live demo &rarr;</a>
+      </div>
+    </li>
+    <li class="card">
+      <a class="cover" href="le-cercle/" target="_blank" rel="noopener"><img src="docs/screenshots/le-cercle.jpg" alt="Le Cercle real-estate site: full-screen video hero of a luxury interior" width="1100" height="688" loading="lazy"></a>
+      <div>
+        <h2>Le Cercle</h2>
+        <p>Luxury real-estate site: scroll-scrubbed video hero, villa cards that play a video on hover, glass-style contact form.</p>
+        <span class="tags">Vanilla HTML / CSS / JS</span>
+        <a class="open" href="le-cercle/" target="_blank" rel="noopener">Open live demo &rarr;</a>
+      </div>
+    </li>
+    <li class="card">
+      <a class="cover" href="joes-coffee/" target="_blank" rel="noopener"><img src="docs/screenshots/joes-coffee.jpg" alt="Edu Coffee site: warm cream background, hand-written style title and a cafe interior photo" width="1100" height="688" loading="lazy"></a>
+      <div>
+        <h2>Edu Coffee <small>(folder: joes-coffee)</small></h2>
+        <p>Playful coffee-shop one-pager with a filterable menu, events and locations.</p>
+        <span class="tags">Vanilla HTML / CSS / JS</span>
+        <a class="open" href="joes-coffee/" target="_blank" rel="noopener">Open live demo &rarr;</a>
+      </div>
+    </li>
+    <li class="card">
+      <a class="cover" href="aurion/" target="_blank" rel="noopener"><img src="docs/screenshots/aurion.jpg" alt="Le Prestige restaurant site: dark dining-room hero with a large serif title" width="1100" height="688" loading="lazy"></a>
+      <div>
+        <h2>Aurion <small>(site title: Le Prestige)</small></h2>
+        <p>Fine-dining restaurant concept: dark editorial look, menu, experiences and reservations.</p>
+        <span class="tags">Vanilla HTML / CSS / JS</span>
+        <a class="open" href="aurion/" target="_blank" rel="noopener">Open live demo &rarr;</a>
+      </div>
+    </li>
+    <li class="card">
+      <a class="cover" href="monrion-travel/" target="_blank" rel="noopener"><img src="docs/screenshots/monrion-travel.jpg" alt="Monrion Travel site: aerial photo of a Dubai coastline with the headline 'Monrion'" width="1100" height="688" loading="lazy"></a>
+      <div>
+        <h2>Monrion Travel</h2>
+        <p>Luxury travel agency concept for Dubai trips: services, destinations, reviews and contact.</p>
+        <span class="tags">Next.js static export · React</span>
+        <a class="open" href="monrion-travel/" target="_blank" rel="noopener">Open live demo &rarr;</a>
+      </div>
+    </li>
+  </ul>
+</main>
+<footer>
+  <p>Source code and notes: <a href="https://github.com/EduardoRochaFernandes/menu-projetos">github.com/EduardoRochaFernandes/menu-projetos</a>. Photos and videos are third-party stock media, see <a href="https://github.com/EduardoRochaFernandes/menu-projetos/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+</footer>
 </body>
 </html>
