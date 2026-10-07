@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /* =====================================================================
-   MENU DE PROJETOS — servidor estático único
+   PROJECT MENU - single static dev server
    -------------------------------------------------------------------
-   Serve o menu e os 3 projetos (joes-coffee/, le-cercle/, lumiere/) a
-   partir de uma única porta. Suporta HTTP Range (necessário para o
-   vídeo do Le Cercle poder ser "seekado" no browser).
+   Serves the landing page and all demo sites (aurion/, joes-coffee/,
+   le-cercle/, lumiere/, monrion-travel/) from one port. Supports HTTP
+   Range requests, which the Le Cercle scroll-scrubbed hero video needs
+   so the browser can seek inside it.
 
-   Uso:  node server.js            (porta 5182 por omissão)
-         node server.js 5190       (porta à escolha)
+   Usage:  node server.js            (default port 5182)
+           node server.js 5190       (custom port)
    ===================================================================== */
 "use strict";
 
@@ -50,7 +51,7 @@ const server = http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split("?")[0]);
   if (urlPath.endsWith("/")) urlPath += "index.html";
 
-  // Resolve dentro de ROOT e impede path traversal (../).
+  // Resolve inside ROOT and block path traversal (../).
   let filePath = path.join(ROOT, path.normalize(urlPath));
   if (!filePath.startsWith(ROOT)) {
     res.writeHead(403);
@@ -58,7 +59,7 @@ const server = http.createServer((req, res) => {
   }
 
   fs.stat(filePath, (err, stat) => {
-    // Pasta sem index.html explícito → tenta path/index.html
+    // Missing file or directory without an explicit index.html -> 404
     if (err || !stat.isFile()) {
       res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
       return res.end("404 Not Found");
@@ -105,7 +106,7 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`Menu de Projetos → http://127.0.0.1:${PORT}`);
-  console.log(`A servir: ${ROOT}`);
+server.listen(PORT, "127.0.0.1", () => {
+  console.log(`Project menu -> http://127.0.0.1:${PORT}`);
+  console.log(`Serving: ${ROOT}`);
 });
